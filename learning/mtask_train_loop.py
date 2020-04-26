@@ -1,12 +1,13 @@
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from comet_ml import Experiment
+# from comet_ml import Experiment
 
-import models.drn as drn
-from models.DRNSeg import DRNSeg
-from models.FCN32s import FCN32s
-import data_transforms as transforms
+# import models.drn as drn
+# from models.DRNSeg import DRNSeg
+# from models.FCN32s import FCN32s
+# import data_transforms as transforms
 import json
 import math
 import os
@@ -30,7 +31,7 @@ from learning.utils_learn import *
 from learning.dataloader import SegList, SegListMS, get_loader, get_info
 import logging
 from learning.validate import validate
-import data_transforms as transforms
+# import data_transforms as transforms
 
 from dataloaders.utils import decode_segmap
 
@@ -54,18 +55,9 @@ def train_mtasks(args):
     for k, v in args.__dict__.items(): # Prints arguments and contents of config file
         print(k, ':', v)
 
-    # CHANGE HERE FOR CITYSCAPE # TODO: can still be combined
-    # if args.dataset == 'taskonomy':
     from models.mtask_losses import get_losses_and_tasks
 
     criteria, taskonomy_tasks = get_losses_and_tasks(args)
-    # elif args.dataset == 'cityscape':
-    #     #TODO Change here for Cityscape
-    #     # from models.mtask_losses import
-    #     total_loss = None
-    #     total_losses, losses, criteria, tasks = get_losses_and_tasks(args)
-        # criteria={}
-        # pass
 
     if args.arch == 'resnet-18':
         from models.taskonomy_models import resnet18_taskonomy
@@ -75,14 +67,14 @@ def train_mtasks(args):
         from models.taskonomy_models import resnet50_taskonomy
         model = resnet50_taskonomy(pretrained=False, tasks=args.task_set)
 
-    elif 'drn' in args.arch:
-        # CHANGE HERE FOR CITYSCAPE
-        from models.DRNSegDepth import DRNSegDepth
-        model = DRNSegDepth(args.arch,
-                            classes=19,
-                            pretrained_model=None,
-                            pretrained=False,
-                            tasks=args.task_set)
+    # elif 'drn' in args.arch:
+    #     # CHANGE HERE FOR CITYSCAPE
+    #     from models.DRNSegDepth import DRNSegDepth
+    #     model = DRNSegDepth(args.arch,
+    #                         classes=19,
+    #                         pretrained_model=None,
+    #                         pretrained=False,
+    #                         tasks=args.task_set)
 
         # CAN TEST THE MODEL HERE BY LOOPING THROUGH THE MODULES AND PASSING THE INPUT
 
@@ -172,13 +164,13 @@ def train_mtasks(args):
         shutil.copytree('.', experiment_backup_folder, ignore=include_patterns('*.py', '*.json'))
 
 
-    experiment = Experiment(api_key="5cU4pCUJ2rWYAEAIZfAO01I3e",
-                                 project_name="robustseg", workspace="vikramnitin9",
-                                 auto_param_logging=False, auto_metric_logging=False,
-                                 parse_args=False, display_summary=False, disabled=(not args.comet))
+    # experiment = Experiment(api_key="5cU4pCUJ2rWYAEAIZfAO01I3e",
+    #                              project_name="robustseg", workspace="vikramnitin9",
+    #                              auto_param_logging=False, auto_metric_logging=False,
+    #                              parse_args=False, display_summary=False, disabled=(not args.comet))
 
-    experiment.set_name(experiment_name)
-    experiment.log_parameters(vars(args))
+    # experiment.set_name(experiment_name)
+    # experiment.log_parameters(vars(args))
 
     # Logging with TensorBoard
     log_dir = os.path.join(experiment_backup_folder, "runs")
@@ -214,28 +206,26 @@ def train_mtasks(args):
 
         torch.cuda.empty_cache()
 
-        if args.adv_train:
-            from learning.mtask_adv_train_loop import adv_train
-            adv_train(train_loader, model, criteria, optimizer, epoch, writer, info, args.dataset,
-                  eval_score=accuracy, args=args)
-        else:
-            train(train_loader, model, criteria, optimizer, epoch, writer, info, args.dataset,
-                  comet=experiment, eval_score=accuracy, args=args)
+        # if args.adv_train:
+        #     from learning.mtask_adv_train_loop import adv_train
+        #     adv_train(train_loader, model, criteria, optimizer, epoch, writer, info, args.dataset,
+        #           eval_score=accuracy, args=args)
+        # else:
+        train(train_loader, model, criteria, optimizer, epoch, writer, info, args.dataset, eval_score=accuracy, args=args)
 
         # evaluate on validation set
-        total_loss = mtask_validate(val_loader, model, criteria, eval_writer, args=args,
-                                    comet=experiment, eval_score=accuracy, info=info, epoch=epoch, print_freq=300)
+        total_loss = mtask_validate(val_loader, model, criteria, eval_writer, args=args, eval_score=accuracy, info=info, epoch=epoch, print_freq=300)
 
-        if args.adv_val and epoch % args.val_freq ==0:
-            # mAP = validate_adv(adv_val_loader, model, args.classes, save_vis=True,
-            #                has_gt=True, output_dir=out_dir, downsize_scale=args.downsize_scale, log_dir=experiment_backup_folder,
-            #                args=args, info=info)
-            from learning.mtask_grad import mtask_forone_grad
-            grad = mtask_forone_grad(val_loader, model, criteria, args.test_task_set, args)
-            writer.add_scalar('Val/adv_Gradient', grad, epoch)
-
-            from learning.mtask_grad import mtask_forone_advacc
-            mtask_forone_advacc(val_loader, model, criteria, args.test_task_set, args, info, writer, epoch)
+        # if args.adv_val and epoch % args.val_freq ==0:
+        #     # mAP = validate_adv(adv_val_loader, model, args.classes, save_vis=True,
+        #     #                has_gt=True, output_dir=out_dir, downsize_scale=args.downsize_scale, log_dir=experiment_backup_folder,
+        #     #                args=args, info=info)
+        #     from learning.mtask_grad import mtask_forone_grad
+        #     grad = mtask_forone_grad(val_loader, model, criteria, args.test_task_set, args)
+        #     writer.add_scalar('Val/adv_Gradient', grad, epoch)
+        #
+        #     from learning.mtask_grad import mtask_forone_advacc
+        #     mtask_forone_advacc(val_loader, model, criteria, args.test_task_set, args, info, writer, epoch)
 
         from learning.validate import validate_adv
 
@@ -256,11 +246,11 @@ def train_mtasks(args):
             history_path = os.path.join(save_model_path, 'checkpoint_{:03d}.pth.tar'.format(epoch + 1))
             shutil.copyfile(checkpoint_path, history_path)
 
-    from learning.mtask_grad import mtask_forone_advacc
-    advacc_result = mtask_forone_advacc(val_loader, model, criteria, args.test_task_set, args, info, epoch,
-                                        comet=experiment, norm='Linf', writer=eval_writer)
+    # from learning.mtask_grad import mtask_forone_advacc
+    # advacc_result = mtask_forone_advacc(val_loader, model, criteria, args.test_task_set, args, info, epoch,
+    #                                     comet=experiment, norm='Linf', writer=eval_writer)
 
-    print(advacc_result)
+    # print(advacc_result)
 
     writer.close()
 
@@ -399,7 +389,7 @@ def train(train_loader, model, criteria, optimizer, epoch, writer, info, dataset
 
             for keys, loss_term in loss_dict.items():
                 writer.add_scalar('Train/Score {}'.format(keys), avg_losses[keys].val, epoch * len(train_loader) + i)
-                if comet is not None: comet.log_metric('Train/Score {}'.format(keys), avg_losses[keys].val, step=epoch * len(train_loader) + i)
+                # if comet is not None: comet.log_metric('Train/Score {}'.format(keys), avg_losses[keys].val, step=epoch * len(train_loader) + i)
 
             # Show TensorBoard visualisations for image labels and the model predictions.
             # Show clean image

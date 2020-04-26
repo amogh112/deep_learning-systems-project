@@ -38,7 +38,7 @@ class TaskonomyLoader(data.Dataset):
 
 	NUM_CLASSES = 21 #TODO: Change the number of classes.
 	INFO = {"mean": [0.485, 0.456, 0.406],
-			"std": [0.229, 0.224, 0.225]} #TODO: Change the info
+			"std": [0.229, 0.224, 0.225]}
 	def __init__(self,
 				 root,
 				 is_training,
