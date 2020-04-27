@@ -109,7 +109,8 @@ def parse_args():
     args = parser.parse_args()
     import socket, json
     # print(glob.glob("./config/*"))
-    print("here ", os.listdir("."))
+    print("here ", os.listdir("./"))
+    print("here ", os.listdir("config"))
     config_file_path = "config/{}_{}_config.json".format(args.model, args.dataset)
     with open (config_file_path) as config_file:
         config = json.load(config_file)
@@ -233,9 +234,6 @@ def parse_args():
     args.step_size = config['step_size']
     args.steps = config['steps']
 
-    # if "adv_train_task_schedule" in config.keys():
-    #     args.adv_train_task_schedule = config["adv_train_task_schedule"]
-
     if args.customize_schedule:
         schedule = args.schedule_str
         task_lists = schedule.split(";")
@@ -251,8 +249,6 @@ def parse_args():
             final_schedule.append(task_list_final)
 
         args.adv_train_task_schedule = final_schedule
-
-
 
     return args
 
@@ -274,13 +270,6 @@ def main():
         torch.cuda.set_rng_state(torch.cuda.get_rng_state())
         torch.backends.cudnn.deterministic = True
 
-    # If adversarial training is enabled, then do adversarial training from learning.mtask_adv_train_loop
-    # if args.adv_train:
-    #     from learning.mtask_adv_train_loop import adv_train_mtasks
-    #     print("Starting adversarial training on ", args.dataset, " with the following task schedule: ", args.adv_train_task_schedule)
-    #     adv_train_mtasks(args)
-
-    # else:
     from learning.mtask_train_loop import train_mtasks
     train_mtasks(args)
 

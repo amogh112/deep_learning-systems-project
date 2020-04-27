@@ -289,7 +289,7 @@ class Decoder(nn.Module):
 
 		else:
 			x = representation
-			#TODO: I add this
+			#TODO: I added this
 
 			x = F.adaptive_avg_pool2d(x, (1, 1))
 			x = x.view(x.size(0), -1)

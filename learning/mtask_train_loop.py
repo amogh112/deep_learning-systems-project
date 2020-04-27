@@ -227,7 +227,7 @@ def train_mtasks(args):
         #     from learning.mtask_grad import mtask_forone_advacc
         #     mtask_forone_advacc(val_loader, model, criteria, args.test_task_set, args, info, writer, epoch)
 
-        from learning.validate import validate_adv
+        # from learning.validate import validate_adv
 
         is_best = total_loss < best_prec1  # fix the bug
         best_prec1 = min(total_loss, best_prec1)

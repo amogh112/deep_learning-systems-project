@@ -15,24 +15,22 @@ import torch.optim as optim
 from torchvision import datasets
 from torch.autograd import Variable
 
-from dataloaders.datasets.pascal import VOCSegmentation
-from dataloaders.datasets.coco import COCOSegmentation
 from dataloaders.datasets.taskonomy import TaskonomyLoader
 import data_transforms as transforms
 
 def get_info(dataset):
     """ Returns dictionary with mean and std"""
 
-    if dataset == 'voc':
-        return VOCSegmentation.INFO
+    # if dataset == 'voc':
+    #     return VOCSegmentation.INFO
+    #
+    # elif dataset == 'coco':
+    #     return COCOSegmentation.INFO
+    #
+    # elif dataset == 'cityscape':
+    #     return SegList.INFO
 
-    elif dataset == 'coco':
-        return COCOSegmentation.INFO
-
-    elif dataset == 'cityscape':
-        return SegList.INFO
-
-    elif dataset == 'taskonomy':
+    if dataset == 'taskonomy':
         return TaskonomyLoader.INFO
 
 def get_loader(args, split, out_name=False, customized_task_set=None):
