@@ -1,6 +1,6 @@
 {
 	"data-dir": "../taskonomy-sample-model-1-small-master",
-	"data-dir_amogh": "/home/amogh/data/taskonomy-sample-model-1",
+	"data-dir_amogh": "/home/amogh/data/ZIP",
 	"data-dir_deep": "/mnt/md0/2019Fall/taskonomy/taskonomy-sample-model-1-small-master",
 	"list-dir": null,
 	"classes": 18,
@@ -57,8 +57,9 @@
 
 	"adv_val": false,
 
-    "task_set": ["autoencoder", "class_object", "class_places", "depth_euclidean", "depth_zbuffer", "edge_occlusion", "edge_texture", "keypoints2d", "keypoints3d", "normal", "principal_curvature", "reshading", "room_layout", "segmentsemantic", "vanishing_point"],
+    "task_set2": ["autoencoder", "class_object", "class_places", "depth_euclidean", "depth_zbuffer", "edge_occlusion", "edge_texture", "keypoints2d", "keypoints3d", "normal", "principal_curvature", "reshading", "room_layout", "segmentsemantic", "vanishing_point"],
+    "task_set": ["autoencoder","normal"],
     "task_set_lambda": [1],
-    "test_task_set": ["autoencoder", "class_object", "class_places", "depth_euclidean", "depth_zbuffer", "edge_occlusion", "edge_texture", "keypoints2d", "keypoints3d", "normal", "principal_curvature", "reshading", "room_layout", "segmentsemantic", "vanishing_point"]
+    "test_task_set": ["normal"]
 
 }
