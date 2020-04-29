@@ -119,9 +119,9 @@ def parse_args():
         args.pretrained = config['pretrained_amogh']
         args.backup_output_dir = config['backup_output_dir_amogh']
     else:
-        args.data_dir = '/proj/mcz/MTLR/Taskonomy/taskonomy-sample-model-1-small-master'
-        args.pretrained = ""
-        args.backup_output_dir = "/proj/mcz/MTLR/Taskonomy/AdvTrainSave_March"
+        args.data_dir = config['data-dir']
+        args.pretrained = config['pretrained']
+        args.backup_output_dir = config['backup_output_dir']
 
     args.step = config['step']
     args.arch = config['arch']
