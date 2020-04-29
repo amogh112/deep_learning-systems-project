@@ -64,5 +64,4 @@
     "test_task_set2":  ["segmentsemantic", "normal", "depth_zbuffer"],
     "task_set_lambda": [1],
     "test_task_set1": ["autoencoder", "class_object", "class_places", "depth_euclidean", "depth_zbuffer", "edge_occlusion", "edge_texture", "keypoints2d", "keypoints3d", "normal", "principal_curvature", "reshading", "room_layout", "segmentsemantic", "vanishing_point"]
-
 }
