@@ -190,17 +190,17 @@ def train_mtasks(args):
 
     # optionally resume from a checkpoint
     if args.resume:
-        print("resuming", args.resume)
-        if os.path.isfile(args.resume):
-            print("=> loading checkpoint '{}'".format(args.resume))
-            checkpoint = torch.load(args.resume)
+        print("resuming", args.resume_path)
+        if os.path.isfile(args.resume_path):
+            print("=> loading checkpoint '{}'".format(args.resume_path))
+            checkpoint = torch.load(args.resume_path)
             start_epoch = checkpoint['epoch']
             best_prec1 = checkpoint['best_prec1']
             model.load_state_dict(checkpoint['state_dict'])
             print("=> loaded checkpoint '{}' (epoch {})"
-                  .format(args.resume, checkpoint['epoch']))
+                  .format(args.resume_path, checkpoint['epoch']))
         else:
-            print("=> no checkpoint found at '{}'".format(args.resume))
+            print("=> no checkpoint found at '{}'".format(args.resume_path))
 
 
     for epoch in range(start_epoch, args.epochs):
