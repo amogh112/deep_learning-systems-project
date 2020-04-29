@@ -24,6 +24,7 @@ import scipy.stats
 
 import models.taskonomy_models as models
 
+
 model_names = sorted(name for name in models.__dict__
                      if name.islower() and not name.startswith("__")
                      and callable(models.__dict__[name]))
@@ -49,6 +50,7 @@ def parse_args():
     parser.add_argument('--adv_train',      action='store_true')
     parser.add_argument('--customize_schedule',      action='store_true')
     parser.add_argument('--schedule_str',type=str,    default='s', help='schedule string')
+    parser.add_argument('--prune', type=str, default=None, help='config name for pruning')
     # parser.add_argument('--data_dir', '-d', dest='data_dir', required=True,
     #                     help='path to training set')
     # parser.add_argument('--arch', '-a', metavar='ARCH', required=True,
@@ -249,7 +251,12 @@ def parse_args():
             final_schedule.append(task_list_final)
 
         args.adv_train_task_schedule = final_schedule
-
+    
+    if args.prune != None:    
+        prune_config_file_path = "config/pruning/{}.json".format(args.prune)
+        with open (prune_config_file_path) as config_file:
+            args.prune = json.load(config_file)
+    print(args.prune)
     return args
 
 

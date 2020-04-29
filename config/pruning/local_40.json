@@ -1,0 +1,8 @@
+    {
+  "_description": "Global weight based pruning",
+  "strategy": "local",
+  "layers": [],
+  "backbone": true,
+  "amount": 0.4,
+  "method": "L1Unstructured"
+}
