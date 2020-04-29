@@ -38,7 +38,7 @@ from dataloaders.utils import decode_segmap
 from torch.utils.tensorboard import SummaryWriter
 from learning.mtask_validate import mtask_validate
 import torchvision
-from learning.prune_models import prune
+from learning.prune_models import prune_model
 
 
 FORMAT = "[%(asctime)-15s %(filename)s:%(lineno)d %(funcName)s] %(message)s"
@@ -145,7 +145,7 @@ def train_mtasks(args):
     
     #prune the model if necessary
     if args.prune != None:
-        model = prune(model, args.prune)
+        model = prune_model(model, args.prune)
 
     cudnn.benchmark = True
     best_prec1 = 0
