@@ -161,9 +161,9 @@ def train_mtasks(args):
         unique_str = str(uuid.uuid4())[:8]
         timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H:%M:%S')
 
-        if args.prune:
+        if args.prune_config:
             experiment_name = "train_" + args.arch + "_" + args.arch + "_" + args.dataset + "_" + timestamp + "_" + unique_str\
-                                       + "_trainset_{}_testset_{}_lambda_{}_seed_{}_lrs_{}_{}_prune_{}".format(args.class_to_train, args.class_to_test, args.mt_lambda, args.seed, args.step_size_schedule[1][0], args.step_size_schedule[2][0],args.prune)
+                                       + "_trainset_{}_testset_{}_lambda_{}_seed_{}_lrs_{}_{}_prune_{}".format(args.class_to_train, args.class_to_test, args.mt_lambda, args.seed, args.step_size_schedule[1][0], args.step_size_schedule[2][0],args.prune_config)
         else:
             experiment_name = "train_" + args.arch + "_" + args.arch + "_" + args.dataset + "_" + timestamp + "_" + unique_str \
                               + "_trainset_{}_testset_{}_lambda_{}_seed_{}_lrs_{}_{}".format(

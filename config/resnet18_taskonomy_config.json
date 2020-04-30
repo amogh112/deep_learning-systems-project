@@ -15,7 +15,7 @@
 
 	"batch-size": 32,
 	"test-batch-size": 64,
-	"epochs": 150,
+	"epochs": 500,
 
 	"lr": 0.003,
 	"lr_change": 0,
@@ -28,8 +28,8 @@
 	"pretrained_amogh_instance": "",
 	"pretrained_deep": "",
 
-	"backup_output_dir": "/home/ag4202/backup/",
-	"backup_output_dir_amogh_instance": "/home/amogh/columbia/research/segmentation/RobustSeg_training_backup/",
+	"backup_output_dir_amogh_instance": "/home/ag4202/backup/",
+	"backup_output_dir": "/home/amogh/columbia/research/segmentation/RobustSeg_training_backup/",
 	"backup_output_dir_amogh": "/home/amogh/columbia/research/segmentation/RobustSeg_training_backup/",
 	"backup_output_dir_deep": "/mnt/md0/2019Fall/SegSaveLog/debug",
 

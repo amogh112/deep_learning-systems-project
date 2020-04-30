@@ -255,8 +255,10 @@ def parse_args():
             final_schedule.append(task_list_final)
 
         args.adv_train_task_schedule = final_schedule
-    
-    if args.prune != None:    
+
+    args.prune_config = None 
+    if args.prune != None:
+        args.prune_config = args.prune
         prune_config_file_path = "config/pruning/{}.json".format(args.prune)
         with open (prune_config_file_path) as config_file:
             args.prune = json.load(config_file)
