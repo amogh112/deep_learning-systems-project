@@ -23,3 +23,6 @@ tensorboard --logdir ./runs --host=0.0.0.0 --port=8080
 Make sure port is open in GCP
 
 In GCP Console, pull the drawer and go to Networks/VPC network. Create a firewall rule. (Ingress , tcp: 8080, IP range 0.0.0.0/0)
+
+Then open in browser <instance IP>
+:8080
