@@ -12,6 +12,8 @@ python mtasks_train.py --model resnet18 --dataset taskonomy --debug --prune glob
 ### To resume using a checkpoint model
 python mtasks_train.py --dataset taskonomy --model resnet18 --resume --resume_path <model_path eg - /home/ag4202/backup/saved/train_resnet-18_taskonomy_2020-04-29_05:57:14_fe0e7bc6_trainset_None_testset_None_lambda_0_seed_42_lrs_140_200_MAIN_MODEL_Arn/savecheckpoint/checkpoint_latest.pth.tar>
 
+First check the GPU usage in train and val using --debug flag
+
 ### To run tensorboard
 Go to the backup folder and cd in teh experiment directory. Run tensorboard there
 eg - 
