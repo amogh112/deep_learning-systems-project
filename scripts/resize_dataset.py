@@ -63,9 +63,7 @@ def resize_dataset(path_dataset, list_tasks, new_dims, interp_order):
 
 if __name__ == "__main__":
     
-    cwd = os.getcwd()
-    print(cwd)
-    root = "taskonomy-sample-model-1"
+    root = "/home/ag4202/taskonomy/taskonomy-sample-model-1"
     list_tasks = ["rgb",
                   "normal",
                   "reshading",
