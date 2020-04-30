@@ -1,5 +1,5 @@
 import os,sys
-import PIL
+import PIL.Image
 # from PIL import Image
 import tqdm
 import glob
@@ -62,18 +62,13 @@ def resize_dataset(path_dataset, list_tasks, new_dims, interp_order):
 
 
 if __name__ == "__main__":
-    root = "/home/ag4202/taskonomy/taskonomy-sample-model-1"
+    
+    cwd = os.getcwd()
+    print(cwd)
+    root = "taskonomy-sample-model-1"
     list_tasks = ["rgb",
-                  "depth_zbuffer",
-                  "edge_texture",
-                  "keypoints2d",
                   "normal",
                   "reshading",
-                  "keypoints3d",
-                  "depth_euclidean",
-                  "edge_occlusion",
-                  "principal_curvature",
-                  "segment_semantic"
                   ]
     new_dims = (256,256)
     resize_dataset(root, list_tasks,new_dims,interp_order=1)
