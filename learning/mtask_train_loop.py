@@ -203,9 +203,9 @@ def train_mtasks(args):
             print("=> no checkpoint found at '{}'".format(args.resume_path))
 
     # Make sure training from 0 start_epoch when finetuning
-    if args.prune:
-        start_epoch = 0
-        print("Pruning, start_epoch is, ", start_epoch)
+    # if args.prune:
+    #     start_epoch = 0
+    #     print("Pruning, start_epoch is, ", start_epoch)
 
 
     for epoch in range(start_epoch, args.epochs):
