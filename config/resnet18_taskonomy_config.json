@@ -1,11 +1,8 @@
 {
-<<<<<<< HEAD
-	"data-dir": "../taskonomy-sample-model-1-small-master",
-	"data-dir_amogh": "/home/amogh/data/ZIP",
-=======
+
 	"data-dir": "/home/ag4202/taskonomy/taskonomy-sample-model-1-small",
+	"data-dir_amogh_instance": "/home/ag4202/taskonomy/taskonomy-sample-model-1-small",
 	"data-dir_amogh": "/home/amogh/data/taskonomy-sample-model-1",
->>>>>>> 665953f5af8ba32cd5d58f84c54b1c5149e7430b
 	"data-dir_deep": "/mnt/md0/2019Fall/taskonomy/taskonomy-sample-model-1-small-master",
 	"list-dir": null,
 	"classes": 18,
@@ -28,9 +25,11 @@
 	"weight-decay": 1e-4,
 	"pretrained": "",
 	"pretrained_amogh": "",
+	"pretrained_amogh_instance": "",
 	"pretrained_deep": "",
 
 	"backup_output_dir": "/home/ag4202/backup/",
+	"backup_output_dir_amogh_instance": "/home/amogh/columbia/research/segmentation/RobustSeg_training_backup/",
 	"backup_output_dir_amogh": "/home/amogh/columbia/research/segmentation/RobustSeg_training_backup/",
 	"backup_output_dir_deep": "/mnt/md0/2019Fall/SegSaveLog/debug",
 
@@ -65,8 +64,8 @@
 
     "task_set1": ["autoencoder", "class_object", "class_places", "depth_euclidean", "depth_zbuffer", "edge_occlusion", "edge_texture", "keypoints2d", "keypoints3d", "normal", "principal_curvature", "reshading", "room_layout", "segmentsemantic", "vanishing_point"],
     "task_set": ["autoencoder", "normal", "reshading"],
-    "task_set2": ["segmentsemantic", "normal", "depth_zbuffer"],
     "test_task_set": ["autoencoder", "normal","reshading"],
+    "task_set2": ["segmentsemantic", "normal", "depth_zbuffer"],
     "test_task_set2":  ["segmentsemantic", "normal", "depth_zbuffer"],
     "task_set_lambda": [1],
     "test_task_set1": ["autoencoder", "class_object", "class_places", "depth_euclidean", "depth_zbuffer", "edge_occlusion", "edge_texture", "keypoints2d", "keypoints3d", "normal", "principal_curvature", "reshading", "room_layout", "segmentsemantic", "vanishing_point"]

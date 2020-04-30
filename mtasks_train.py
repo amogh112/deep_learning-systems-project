@@ -120,6 +120,10 @@ def parse_args():
         args.data_dir = config['data-dir_amogh']
         args.pretrained = config['pretrained_amogh']
         args.backup_output_dir = config['backup_output_dir_amogh']
+    elif socket.gethostname() == "proj-2":
+        args.data_dir = config['data-dir_amogh_instance']
+        args.pretrained = config['pretrained_amogh_instance']
+        args.backup_output_dir = config['backup_output_dir_amogh_instance']
     else:
         args.data_dir = config['data-dir']
         args.pretrained = config['pretrained']
