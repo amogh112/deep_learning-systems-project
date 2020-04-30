@@ -67,6 +67,7 @@ if __name__ == "__main__":
     list_tasks = ["rgb",
                   "normal",
                   "reshading",
+                  "depth_euclidean"
                   ]
     new_dims = (256,256)
     resize_dataset(root, list_tasks,new_dims,interp_order=1)
