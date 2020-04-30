@@ -143,9 +143,6 @@ def train_mtasks(args):
         print("Using Adam")
         optimizer = torch.optim.Adam(model.parameters())
     
-    #prune the model if necessary
-    if args.prune != None:
-        model = prune_model(model, args.prune)
 
     cudnn.benchmark = True
     best_prec1 = 0
@@ -215,6 +212,9 @@ def train_mtasks(args):
     #     start_epoch = 0
         print("Pruning, your pretrained model is trained to {} epochs, training upto {} ".format(start_epoch, args.epochs), )
 
+    #prune the model if necessary
+    if args.prune != None:
+        model = prune_model(model, args.prune)
 
     for epoch in range(start_epoch, args.epochs):
 
