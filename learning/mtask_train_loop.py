@@ -38,6 +38,7 @@ from dataloaders.utils import decode_segmap
 from torch.utils.tensorboard import SummaryWriter
 from learning.mtask_validate import mtask_validate
 import torchvision
+from learning.prune_models import prune_model
 
 
 FORMAT = "[%(asctime)-15s %(filename)s:%(lineno)d %(funcName)s] %(message)s"
@@ -141,6 +142,10 @@ def train_mtasks(args):
     elif args.optim == 'adam':
         print("Using Adam")
         optimizer = torch.optim.Adam(model.parameters())
+    
+    #prune the model if necessary
+    if args.prune != None:
+        model = prune_model(model, args.prune)
 
     cudnn.benchmark = True
     best_prec1 = 0
@@ -185,17 +190,22 @@ def train_mtasks(args):
 
     # optionally resume from a checkpoint
     if args.resume:
-        print("resuming", args.resume)
-        if os.path.isfile(args.resume):
-            print("=> loading checkpoint '{}'".format(args.resume))
-            checkpoint = torch.load(args.resume)
+        print("resuming", args.resume_path)
+        if os.path.isfile(args.resume_path):
+            print("=> loading checkpoint '{}'".format(args.resume_path))
+            checkpoint = torch.load(args.resume_path)
             start_epoch = checkpoint['epoch']
             best_prec1 = checkpoint['best_prec1']
             model.load_state_dict(checkpoint['state_dict'])
             print("=> loaded checkpoint '{}' (epoch {})"
-                  .format(args.resume, checkpoint['epoch']))
+                  .format(args.resume_path, checkpoint['epoch']))
         else:
-            print("=> no checkpoint found at '{}'".format(args.resume))
+            print("=> no checkpoint found at '{}'".format(args.resume_path))
+
+    # Make sure training from 0 start_epoch when finetuning
+    if args.prune:
+        start_epoch = 0
+        print("Pruning, start_epoch is, ", start_epoch)
 
 
     for epoch in range(start_epoch, args.epochs):
