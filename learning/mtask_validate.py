@@ -190,8 +190,7 @@ def mtask_validate(val_loader, model, criteria, writer, comet=None, args=None, e
 
             if args.debug:
                 print_freq = 2
-            #if i % print_freq == 0:
-            if i == -1:
+            if i % print_freq == 0:
 
                 str = 'Test: [{0}/{1}]\t' \
                             'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'.format(
