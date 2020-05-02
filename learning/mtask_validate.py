@@ -115,7 +115,7 @@ def mtask_test_clean(val_loader, model, criterion, task_for_test, args=None, inf
         print("These losses are returned", dict_losses)
         return dict_losses
 
-def mtask_validate(val_loader, model, criteria, writer, comet=None, args=None, eval_score=None, print_freq=200, info=None, epoch=0):
+def mtask_validate(val_loader, model, criteria, writer, comet=None, args=None, eval_score=None, print_freq=200, info=None, epoch=0, return_all_losses=False):
     batch_time = AverageMeter()
     losses = AverageMeter()
     score = AverageMeter()
@@ -296,8 +296,11 @@ def mtask_validate(val_loader, model, criteria, writer, comet=None, args=None, e
     #
 
     torch.cuda.empty_cache()
+    if return_all_losses:
+        return [l.avg for l in avg_losses.values()]
+    else:
+        return np.mean([l.avg for l in avg_losses.values()])
 
-    return np.mean([l.avg for l in avg_losses.values()])
 
 def mtask_adv_validate(val_loader, model, criteria, writer, comet=None, args=None, eval_score=None, print_freq=200, info=None, epoch=0):
     batch_time = AverageMeter()

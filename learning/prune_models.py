@@ -54,10 +54,9 @@ def prune_model(model, config):
     
     if layers == []:
         #include all conv layers
-        modules = [module for name, module in model.named_modules() if isinstance(module, torch.nn.Conv2d)]
+        modules = [module for name, module in section_to_prune.named_modules() if isinstance(module, torch.nn.Conv2d)]
     else:
-        modules = [module for name, module in model.named_modules() if isinstance(module, torch.nn.Conv2d) and name in layers]
-    
+        modules = [module for name, module in section_to_prune.named_modules() if isinstance(module, torch.nn.Conv2d) and name in layers]
 
     if strategy == 'global':
         parameters_to_prune = []
