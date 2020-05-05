@@ -57,7 +57,9 @@ def prune_model(model, config):
         modules = [module for name, module in section_to_prune.named_modules() if isinstance(module, torch.nn.Conv2d)]
     else:
         modules = [module for name, module in section_to_prune.named_modules() if isinstance(module, torch.nn.Conv2d) and name in layers]
-
+    
+    print(modules, len(modules))
+    
     if strategy == 'global':
         parameters_to_prune = []
         for module in modules:
@@ -93,4 +95,38 @@ def prune_model(model, config):
                 
     how_sparse(modules)
 
+    return model
+
+
+def remove_prune_masks(model, config):
+    #config was the strategy you originally pruned with
+    strategy = config['strategy']
+    layers = config['layers']
+    backbone = config['backbone']
+    amount = config['amount']
+    method = config['method']
+
+    section_to_prune = None
+    if backbone == True:
+        #need model.module for DataParallel object
+        section_to_prune = model.module.encoder
+    else:
+        section_to_prune = model.module.task_to_decoder
+        #right now only considering the backbone
+        #section_to_prune = model.task_to_decoder[task]
+    
+    if layers == []:
+        #include all conv layers
+        modules = [module for name, module in section_to_prune.named_modules() if isinstance(module, torch.nn.Conv2d)]
+    else:
+        modules = [module for name, module in section_to_prune.named_modules() if isinstance(module, torch.nn.Conv2d) and name in layers]
+
+    print(modules, len(modules))
+
+    for module in modules:
+        print(list(module.named_buffers()))
+        prune.remove(module, 'weight')
+        print(list(module.named_buffers()))
+    how_sparse(modules)
+    
     return model
