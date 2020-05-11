@@ -1,6 +1,6 @@
 # Deep Learning System Performance Project
 
-Project repository
+Multi-task compression using pruning
 
 ## How to run?
 
