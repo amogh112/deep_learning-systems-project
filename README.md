@@ -1,6 +1,4 @@
-# Deep Learning System Performance Project
-
-Multi-task compression using pruning
+# Multi-task Learning Model Compression using Pruning
 
 ## How to run?
 
